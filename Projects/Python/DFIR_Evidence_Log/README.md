@@ -1,6 +1,6 @@
-****Digital Evidence Log V1.0****
+## <u><strong>Digital Evidence Log V1.0</strong></u>
 
-**Project Overview**
+**Project Overview:**
 
 This project is a simple digital evidence logging tool designed to support basic DFIR (Digital Forensics & Incident Response) workflows. It allows an investigator to record case details, generate a timestamped evidence entry, and automatically produce an MD5 hash to verify integrity.
 The script demonstrates foundational skills in Python automation, file handling, and forensic record‑keeping.
@@ -9,7 +9,7 @@ The script demonstrates foundational skills in Python automation, file handling,
 ---
 
 
-**Objectives**
+**Objectives:**
 
 - Build a lightweight tool to simulate real‑world evidence logging.
 - Practice Python fundamentals such as input handling, file operations, and directory management.
@@ -20,7 +20,7 @@ The script demonstrates foundational skills in Python automation, file handling,
 ---
 
 
-**Features**
+**Features:**
 
 - Collects case number, officer name, evidence title, and description.
 - Automatically creates case folders if they do not already exist.
@@ -33,7 +33,7 @@ The script demonstrates foundational skills in Python automation, file handling,
 ---
 
 
-**Skills Demonstrated**
+**Skills Demonstrated:**
 
 - Python scripting and automation
 - File and directory handling (os, open(), path management)
@@ -45,7 +45,7 @@ The script demonstrates foundational skills in Python automation, file handling,
 ---
 
 
-**Project Structure**
+**Project Structure:**
 
 | Component | Description |
 |----------|-------------|
@@ -57,7 +57,7 @@ The script demonstrates foundational skills in Python automation, file handling,
 ---
 
 
-**How to Run**
+**How to Run:**
 
 - Ensure Python 3 is installed.
 - Save the script in your working directory.
@@ -69,7 +69,7 @@ The script demonstrates foundational skills in Python automation, file handling,
 ---
 
 
-**Security Considerations**
+**Security Considerations:**
 
 - MD5 is used for educational purposes; in real forensic environments, stronger hashing algorithms (e.g., SHA‑256) are preferred.
 - User input is not validated or sanitized — this is acceptable for a learning tool but should be improved for production use.
@@ -79,7 +79,7 @@ The script demonstrates foundational skills in Python automation, file handling,
 --
 
 
-**What I Learned**
+**What I Learned:**
 
 - How to structure a Python script around a real‑world DFIR workflow.
 - The importance of timestamps and consistent formatting in forensic documentation.
@@ -91,7 +91,7 @@ The script demonstrates foundational skills in Python automation, file handling,
 --
 
 
-**Future Improvements**
+**Future Improvements:**
 
 - Add digital signature support (e.g., RSA signing).
 - Replace MD5 with SHA‑256 or SHA‑3.
