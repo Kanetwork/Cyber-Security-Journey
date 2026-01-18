@@ -97,7 +97,5 @@ The script demonstrates foundational skills in Python automation, file handling,
 - Replace MD5 with SHA‑256 or SHA‑3.
 - Implement input validation and error handling.
 - Add a verification mode to check hashes against stored entries.
-
-Build a GUI version for easier use by non‑technical investigators.
-
-Export logs in JSON or CSV for ingestion into forensic platforms.
+- Build a GUI version for easier use by non‑technical investigators.
+- Export logs in JSON or CSV for ingestion into forensic platforms.
