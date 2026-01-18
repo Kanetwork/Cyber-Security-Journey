@@ -76,7 +76,7 @@ The script demonstrates foundational skills in Python automation, file handling,
 - No encryption or access control is implemented; this script is intended for demonstration, not operational deployment.
 
 
---
+---
 
 
 **What I Learned:**
@@ -88,7 +88,7 @@ The script demonstrates foundational skills in Python automation, file handling,
 - How to design a simple but functional command‑line tool.
 
 
---
+---
 
 
 **Future Improvements:**
