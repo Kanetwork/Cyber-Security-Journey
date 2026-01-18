@@ -1,0 +1,51 @@
+# Python artifacts
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.so
+*.egg
+*.egg-info/
+dist/
+build/
+*.spec
+
+# Virtual environments
+venv/
+.venv/
+ENV/
+env/
+pip-wheel-metadata/
+
+# Logs and temp files
+*.log
+*.tmp
+*.cache
+
+# Editor and IDE settings
+.vscode/
+.idea/
+*.sublime-workspace
+*.sublime-project
+
+# System files
+.DS_Store
+Thumbs.db
+
+# Forensic and CTF artifacts
+*.pcap
+*.pcapng
+*.raw
+*.E01
+*.dmp
+*.img
+*.bin
+*.mem
+*.sqlite
+*.db
+
+# Optional: screenshots
+# *.png
+# *.jpg
+# *.jpeg
+
