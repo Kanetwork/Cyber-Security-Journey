@@ -4,7 +4,7 @@
 ---
 
 
-## <u><strong>[Digital Evidence Log V1.0](./DFIR_Evidence_Log)</strong></u>
+## <u><strong>[Digital Evidence Log V1.0](./Python/DFIR_Evidence_Log)</strong></u>
 
 **Project Overview:**
 This project is a simple digital evidence logging tool designed to support basic DFIR (Digital Forensics & Incident Response) workflows. It allows an investigator to record case details, generate a timestamped evidence entry, and automatically produce an MD5 hash to verify integrity.
