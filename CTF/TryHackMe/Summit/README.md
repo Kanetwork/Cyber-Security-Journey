@@ -1,134 +1,127 @@
-## SUMMIT ##
+# SUMMIT — TryHackMe Write‑Up
 
-
-**Challenge Overview**
-
-Examine 'samples' received from the Sphinx, from the pentesting team, and apply the appropriate response to block the malware 
----
-**Objective**
-
-After participating in one too many incident response activities, PicoSecure has decided to conduct a threat simulation and detection engineering engagement to bolster its malware detection capabilities. You have been assigned to work with an external penetration tester in an iterative purple-team scenario. The tester will be attempting to execute malware samples on a simulated internal user workstation. At the same time, you will need to configure PicoSecure's security tools to detect and prevent the malware from executing.
-
-Following the Pyramid of Pain's ascending priority of indicators, your objective is to increase the simulated adversaries' cost of operations and chase them away for good. Each level of the pyramid allows you to detect and prevent various indicators of attack.
+## Challenge Overview
+Examine the malware “samples” received from the Sphinx (the pentesting team) and apply the appropriate response to block the malware.
 
 ---
-**Skills applied**
 
-- Problem solving
-- Manage firewall rules
-- Manage DNS filters
-- Creating custom rules
+## Objective
+PicoSecure is conducting a threat simulation and detection engineering engagement to strengthen its malware detection capabilities. You are working with an external penetration tester in a purple‑team scenario. The tester will attempt to execute malware samples on a simulated internal workstation, while you configure PicoSecure’s security tools to detect and prevent the malware.
 
----
-**Flag**
-
-1. THM{f3cbf08151**********************}
-
-Observations: After examining 'Sample 1' within the 'Maware Sandbox' it is tagged as 'Troja.Metasploit.A'.  Further down it provided 3 different HASH Types
-
-a. MD5	cbda8ae000aa9cbe7c8b982bae006c2a
-
-b. SHA1	83d2791ca93e58688598485aa62597c0ebbf7610
-
-c. SHA256	9c550591a25c6228cb7d74d970d133d75c961ffed2ef7180144859cc09efca8c
-
-Within the tools available on the VM, there is a 'Manage Hashes' tool. This is going to be used to mitigate 'Sample 1'. 
-
-Method: taking one of the HASH values, i used cbda8ae000aa9cbe7c8b982bae006c2a, and pasted it into the free text box and ensured MD5 is selcted, after submission a emial is recieved with the first flag
+Following the Pyramid of Pain, your goal is to increase the adversary’s operational cost by detecting and blocking indicators at progressively more difficult levels.
 
 ---
-2.THM{2ff48a3421**********************}
 
-Observations: Within 'Sample 2' There is both HASH value and now we have internet connections the tag of the file is 'Troja.Metasploit.A'. Main thing i notice if the HTTP GET request being made. This is likely to be vector requiring to be blocked along with the HASH Value. Whe attempting to submit the HASH Value, the response directs you to tray another method, resulting in another tool being considered.
-
-The offending IP in the GET Request is 	154.35.10.113:4444 (IP:154.35.10.113 on Port:4444) 
-
-Method: Within theFirewall rule manager, i am met with 4 fields to fill. the following was selected;
-
-Type: Egress (To prevent outbound traffic)
-
-Source IP: Any (To apply to all users on my network)
-
-Destination IP:154.35.10.113 (Malicious IP)
-
-Action: Deny (to prevent access)
+## Skills Applied
+- Problem solving  
+- Managing firewall rules  
+- Managing DNS filters  
+- Creating custom detection rules  
 
 ---
-3. THM{4eca9e2f61**********************}
 
-Observations: 'Sample 3' provides both HASH values and HTTP GET requests as before, however this time there is the inclusion of DNS. Following the attempt within Flag 2, i am going to apply the rule on the 'DNS Filter'. Within the DNS requests there is two DNS accessed
+# Flag 1 — THM{f3cbf08151**********************}
 
-a. services.microsoft.com
+### Observations
+Sample 1 is tagged as **Trojan.Metasploit.A** in the Malware Sandbox. It provides three hash values:
 
-b. emudyn.bresonicz.info
+- **MD5:** cbda8ae000aa9cbe7c8b982bae006c2a  
+- **SHA1:** 83d2791ca93e58688598485aa62597c0ebbf7610  
+- **SHA256:** 9c550591a25c6228cb7d74d970d133d75c961ffed2ef7180144859cc09efca8c  
 
-Whilst on initial glance i lean towards 'emudyn.bresonicz.info' being the malicious link. To verify, this i am going to review the HTTP Requests, i can see the GET requests were made to 62.123.140.9 on both ports 1337 and 80 which resovle to an .exe and apparent sub domain within emudyn.bresonicz.info
+The VM includes a **Manage Hashes** tool used to mitigate malicious files.
 
-On the DNS Rule manager the following ws entered;
-
-Rule Name: Malware_Site
-
-Category: Malware
-
-Domain Name: emudyn.bresonicz.info
-
-Action: Deny
+### Method
+I submitted the MD5 hash (`cbda8ae000aa9cbe7c8b982bae006c2a`) using the Manage Hashes tool. After selecting MD5 and submitting, an email arrived containing the first flag.
 
 ---
-4. THM{c956f455fc**********************}
 
-Observations: 'Sample 4' provides HASH Values, HTTP GET Requests and DNS requests, there is now a inclusion of Registry Activity. Smaple 4 which is our testing malware as disabled out Windows defender.
+# Flag 2 — THM{2ff48a3421**********************}
 
-There is 3 events witihn the Registry, however there is one which causes issue due to the proccess accessed.
+### Observations
+Sample 2 again shows **Trojan.Metasploit.A**, but now includes network activity. The HTTP GET request reveals a malicious outbound connection to:
 
-(PID) Process: (3806) sample4.exe	
+**154.35.10.113:4444**
 
-Key: HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows Defender\Real-Time Protection
+Submitting the hash alone prompts a message suggesting another method is required — indicating a firewall rule is needed.
 
-Operation: write	
+### Method
+Using the Firewall Rule Manager:
 
-Name: DisableRealtimeMonitoring
+- **Type:** Egress  
+- **Source IP:** Any  
+- **Destination IP:** 154.35.10.113  
+- **Action:** Deny  
 
-Method: Within the Sigma Rule Builder, i accessed 'Sysmon Event Logs' which manges Windows System Services, which Windowws Defender belongs. I then selected 'Registry Modifications' as there is a chnage to our registry. For the Rule i applied the following;
-
-Registry Key: HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows Defender\Real-Time Protection (This is what was changed)
-
-Registry Name:DisableRealtimeMonitoring (The associated name to the registry)
-
-Value: 1 (1= On)
-
-ATT&CK ID: DEFENSE EVASION (TA0005) (This is the ATT&CK ID from MITRE) 
+This blocks outbound traffic to the malicious IP.
 
 ---
-5. THM{46b21c4410**********************}
 
-Observations: On the email there is an different file to the 'Sample' which is called 'outgoing_connections.log' Extract below (first 4 row);
+# Flag 3 — THM{4eca9e2f61**********************}
 
-2023-08-15 09:00:00 | Source: 10.10.15.12 | Destination: 51.102.10.19 | Port: 443 | Size: 97 bytes
-2023-08-15 09:23:45 | Source: 10.10.15.12 | Destination: 43.10.65.115 | Port: 443 | Size: 21541 bytes
-2023-08-15 09:30:00 | Source: 10.10.15.12 | Destination: 51.102.10.19 | Port: 443 | Size: 97 bytes
-2023-08-15 10:00:00 | Source: 10.10.15.12 | Destination: 51.102.10.19 | Port: 443 | Size: 97 bytes
+### Observations
+Sample 3 includes hashes, HTTP GET requests, and now DNS activity. Two domains appear:
 
-Within this there is a series connections all from IP 10.10.15.12, the location vary, however one repeats at 30 min intervals. This is 51.102.10.19 over Port 443 sending 97 bytes. Which is unusual, so an inspection of 'Sample 5' is required. 
+- services.microsoft.com  
+- emudyn.bresonicz.info  
 
-Within the Network Activity, i can see a series of POST requests to 51.102.10.19:443 (IP: 51.102.10.19 Port:443), the IP matches the connections Log. 
+Reviewing the HTTP requests shows connections to **62.123.140.9**, resolving to subdomains of *emudyn.bresonicz.info*, confirming it as malicious.
 
-On the Sigma Rule Builder, within the Sysmons Event Logs there is a Network Connections where the following rules was applied
+### Method
+Using the DNS Filter:
 
-Remote IP: Any (Origionally i typed 51.102.10.19, which was an incorrect value to retrive the flag, after reviewing the Email for this Flag i noticed 'so I can easily change the types of protocols' this prompted me to change to rule to apply to a wider net, hence Any)
-
-Remote Port: Any (As above)
-
-Size: 97 bytes (tThis remained constnat)
-
-Frequency: 1800 (30 min in seconds)
-
-ATT &CK ID: Command and Control (C2) 
+- **Rule Name:** Malware_Site  
+- **Category:** Malware  
+- **Domain Name:** emudyn.bresonicz.info  
+- **Action:** Deny  
 
 ---
-6. THM{c8951b2ad2**********************}
 
-Observations: Within the email received there is a file tiltled  'Commands.Log' within it is the following;
+# Flag 4 — THM{c956f455fc**********************}
+
+### Observations
+Sample 4 includes registry activity. The malware disables Windows Defender by modifying:
+
+- **Process:** sample4.exe (PID 3806)  
+- **Registry Key:** HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows Defender\Real-Time Protection  
+- **Value Name:** DisableRealtimeMonitoring  
+- **Operation:** Write  
+
+### Method
+Using the Sigma Rule Builder → Sysmon Event Logs → Registry Modifications:
+
+- **Registry Key:** HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows Defender\Real-Time Protection  
+- **Registry Name:** DisableRealtimeMonitoring  
+- **Value:** 1  
+- **ATT&CK ID:** Defense Evasion (TA0005)  
+
+---
+
+# Flag 5 — THM{46b21c4410**********************}
+
+### Observations
+The email includes **outgoing_connections.log**, showing repeated connections every 30 minutes:
+
+
+Sample 5 confirms POST requests to **51.102.10.19:443**, which routinely occurse ever 30 mins and to the size of 97 bytes.
+
+### Method
+Using Sigma Rule Builder → Sysmon Event Logs → Network Connections:
+
+- **Remote IP:** Any  
+- **Remote Port:** Any  
+- **Size:** 97 bytes  
+- **Frequency:** 1800 seconds (30 minutes)  
+- **ATT&CK ID:** Command and Control (C2)  
+
+The hint in the email (“so I can easily change the types of protocols”) indicated the rule needed to be broad, not IP‑specific.
+
+---
+
+# Flag 6 — THM{c8951b2ad2**********************}
+
+### Observations
+The email includes **Commands.log**, containing:
 
 dir c:\ >> %temp%\exfiltr8.log
 dir "c:\Documents and Settings" >> %temp%\exfiltr8.log
@@ -141,16 +134,19 @@ ipconfig /all >> %temp%\exfiltr8.log
 netstat -ano >> %temp%\exfiltr8.log
 net start >> %temp%\exfiltr8.log
 
-Looking at this, it appears as though files are being extracted and stored into a file named 'exfiltr8.log' 
-(Breakdown ex 'systeminfo' = interprets system infor, '>>' = gets the info and sends it to a location, '%temp%' the extracted dats is sent to the %temp% folder, where the data is stored in a file called 'exfiltr8.log'
 
-Within the sample 6 is file activity namely Dropped Files using cmd.exe %temp%\exfiltr8.log is created.
+This shows system information being collected and written to **exfiltr8.log** in the `%temp%` directory.
 
-Within the Sigma Rule Builder, and the Sysmons Event Logs is File Creation and Modification where the following rule was applied;
+Sample 6 also shows file creation activity via `cmd.exe` at `%temp%\exfiltr8.log`.
 
-File Path: %temp% (prevents action within the folder)
+### Method
+Using Sigma Rule Builder → Sysmon Event Logs → File Creation and Modification:
 
-Filename: exfiltr8.log (prevents action within file)
+- **File Path:** %temp%  
+- **Filename:** exfiltr8.log  
+- **ATT&CK ID:** Exfiltration  
 
-ATT&ID: Extraction
+---
 
+## Conclusion
+This challenge demonstrates how layered detection engineering — hashes, firewall rules, DNS filtering, registry monitoring, network behavior, and file activity — can significantly increase an adversary’s operational cost and reduce their ability to execute malware successfully.
