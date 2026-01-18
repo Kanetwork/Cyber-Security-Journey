@@ -1,3 +1,6 @@
+## SUMMIT ##
+
+
 **Challenge Overview**
 
 Examine 'samples' received from the Sphinx, from the pentesting team, and apply the appropriate response to block the malware 
@@ -19,7 +22,7 @@ Following the Pyramid of Pain's ascending priority of indicators, your objective
 ---
 **Flag**
 
-1. THM{f3cbf08151a11a6a331db9c6cf5f4fe4}
+1. THM{f3cbf08151**********************}
 
 Observations: After examining 'Sample 1' within the 'Maware Sandbox' it is tagged as 'Troja.Metasploit.A'.  Further down it provided 3 different HASH Types
 
@@ -34,7 +37,7 @@ Within the tools available on the VM, there is a 'Manage Hashes' tool. This is g
 Method: taking one of the HASH values, i used cbda8ae000aa9cbe7c8b982bae006c2a, and pasted it into the free text box and ensured MD5 is selcted, after submission a emial is recieved with the first flag
 
 ---
-2.THM{2ff48a3421a938b388418be273f4806d}
+2.THM{2ff48a3421**********************}
 
 Observations: Within 'Sample 2' There is both HASH value and now we have internet connections the tag of the file is 'Troja.Metasploit.A'. Main thing i notice if the HTTP GET request being made. This is likely to be vector requiring to be blocked along with the HASH Value. Whe attempting to submit the HASH Value, the response directs you to tray another method, resulting in another tool being considered.
 
@@ -51,7 +54,7 @@ Destination IP:154.35.10.113 (Malicious IP)
 Action: Deny (to prevent access)
 
 ---
-3. THM{4eca9e2f61a19ecd5df34c788e7dce16}
+3. THM{4eca9e2f61**********************}
 
 Observations: 'Sample 3' provides both HASH values and HTTP GET requests as before, however this time there is the inclusion of DNS. Following the attempt within Flag 2, i am going to apply the rule on the 'DNS Filter'. Within the DNS requests there is two DNS accessed
 
@@ -72,7 +75,7 @@ Domain Name: emudyn.bresonicz.info
 Action: Deny
 
 ---
-4. THM{c956f455fc076aea829799c0876ee399}
+4. THM{c956f455fc**********************}
 
 Observations: 'Sample 4' provides HASH Values, HTTP GET Requests and DNS requests, there is now a inclusion of Registry Activity. Smaple 4 which is our testing malware as disabled out Windows defender.
 
@@ -97,7 +100,7 @@ Value: 1 (1= On)
 ATT&CK ID: DEFENSE EVASION (TA0005) (This is the ATT&CK ID from MITRE) 
 
 ---
-5. THM{46b21c4410e47dc5729ceadef0fc722e}
+5. THM{46b21c4410**********************}
 
 Observations: On the email there is an different file to the 'Sample' which is called 'outgoing_connections.log' Extract below (first 4 row);
 
@@ -123,7 +126,7 @@ Frequency: 1800 (30 min in seconds)
 ATT &CK ID: Command and Control (C2) 
 
 ---
-6. THM{c8951b2ad24bbcbac60c16cf2c83d92c}
+6. THM{c8951b2ad2**********************}
 
 Observations: Within the email received there is a file tiltled  'Commands.Log' within it is the following;
 

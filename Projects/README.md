@@ -1,4 +1,4 @@
-****A collection of Python scripts created as part of my Cyber Security Journey. Each project includes a clear purpose, learning objectives, and practical security concepts.****
+**A collection of Python scripts created as part of my Cyber Security Journey. Each project includes a clear purpose, learning objectives, and practical security concepts.**
 
 
 ---
