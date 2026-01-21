@@ -1,23 +1,31 @@
-## <u><strong>About This Repository</strong></u>
+### Investigative Professional | Transitioning to Blue Team Ops & DFIR
 
-This repository documents my structured, hands‑on journey into cybersecurity, with a strong focus on Digital Forensics and Incident Response (DFIR). It serves as a growing collection of practical tools, scripts, notes, and experiments covering Python automation, threat detection, OSINT, malware analysis, networking, and core security fundamentals.
+Welcome to my repository. I am applying my experience in evidence preservation to the world of Cybersecurity. I am currently **self-studying** to build a technical foundation in networking and digital forensics.
 
-My goal is to build real, working solutions while developing the mindset and technical depth required to become a DFIR specialist. Each project reflects genuine progression — from foundational concepts to more advanced, investigative tooling — and is designed to demonstrate practical skills to future employers, support my certification path, and act as a reference for my future self.
+---
 
-Whether you're a recruiter, a fellow learner, or simply curious, this repository offers a transparent look at how I learn, build, break, and improve as I move deeper into the cybersecurity field.
+## 🧭 My Learning Path (In Progress)
+I am currently working through a structured curriculum to bridge the gap from physical to digital investigation.
 
-## <u><strong>Purpose and Vision</strong></u>
+* **Current Focus:** [TryHackMe SOC Level 1 Hierarchy] 
+* **Primary Objective:** Understanding how data moves across a network and where evidence is stored in an OS.
 
-This repository is more than a collection of scripts — it’s a living record of my development as a cybersecurity practitioner. I’m building toward a career in DFIR, and this space captures the tools, techniques, and thought processes I’m developing along the way.
+### 🛡️ Skills I am Building:
+* **Network Analysis:** Learning to identify suspicious traffic patterns.
+* **Scripting:** Using Python to automate repetitive investigative tasks.
+* **Evidence Handling:** Applying the "Chain of Custody" mindset to digital artifacts.
 
-Every project here is intentionally practical. Instead of abstract exercises, I focus on creating tools that mirror real‑world workflows: evidence logging, automation, detection logic, OSINT gathering, malware analysis fundamentals, and network‑focused tasks. The aim is to show clear progression from beginner concepts to more advanced investigative capabilities.
+---
 
-This repo is built for three audiences:
+## 🛠️ The Toolbelt (Hands-on Training)
+| Tool | Status | How I'm Using It |
+| :--- | :--- | :--- |
+| **Wireshark** | Learning | Analyzing packet captures to identify web traffic patterns. |
+| **Python** | Learning | Developing custom scripts for case logging and directory management. |
+| **Linux (Kali)** | Learning | Getting comfortable with the Command Line (CLI) and file navigation. |
+| **TryHackMe** | Active Use | Completing hands-on labs in SOC and Forensics pathways. |
 
-Future me, who will look back on these foundations
-
-Recruiters, who want to see real, demonstrable skill
-
-Anyone curious, who wants to follow a transparent, structured learning path
-
-My long‑term goal is to become a DFIR specialist, and this repository is the roadmap — documenting growth, supporting certification prep, and showcasing the practical skills I’m building along the way.
+## 📁 Repository Structure
+* `📂 ./Projects/` -  Early Python based scripts.
+* `📂 ./CTF/` - My observations and write-ups from TryHackMe rooms.
+* `📂 ./Resources/` - A collection of cheat sheets and guides I'm using to study.

@@ -1,0 +1,17 @@
+## Windows OS BOLO
+
+## Key ID's 
+
+| Key ID | Description |
+| :--- | :--- |
+| 4624 | Successful login |
+| 4625 | Failed logon |
+| 4688 | New process run |
+| 1102 | Audit log cleared |
+
+## Reistry Keys
+
+| Registry Key | possible action |
+| :--- | :--- |
+| Run/Runonce | idnicates action |
+| Shimcache | view past events |
